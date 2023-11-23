@@ -39,8 +39,8 @@ main {
 }
 
 
-/* input {
-  display: inline !important;
-  width: 100px !important;
-  margin: 5px !important;
-} */
+.num {
+  display: inline;
+  width: 150px;
+  margin: 5px;
+}
