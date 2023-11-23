@@ -2,9 +2,45 @@
   text-align: center;
 }
 
+
 header {
-  background-color: #f3e2e2;
-  margin: 20px;
+  background-color: lightblue;
+  padding: 20px;
+  margin: 30px;
+}
+
+main {
+  background-color: lightcyan;
   padding: 10px;
 }
 
+.box {
+  padding: 10px;
+}
+
+.function {
+  background-color: lightgoldenrodyellow;
+}
+
+.var {
+  background-color: #ddf8e2;
+}
+
+.condition {
+  background-color: #f3d4f7;
+}
+
+.iterate {
+  background-color: #f3e2e7;
+}
+
+.network {
+  background-color: #e2e5fd;
+}
+
+
+/* input {
+  display: inline !important;
+  width: 100px !important;
+  margin: 5px !important;
+} */
