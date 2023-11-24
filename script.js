@@ -13,14 +13,17 @@ function 더하기(a, b) {
 function 곱하기() {
   var num1 = parseInt(document.getElementById('num1').value);
   var num2 = parseInt(document.getElementById('num2').value);
+  if(isNaN(num1)||isNaN(num2)){
+    return
+  }
   var 결과 = num1 * num2;
   alert(결과);
   return 결과;
 }
 
 // "평가" 함수: 두 숫자를 곱한 결과가 10보다 크면 "합격"을, 그렇지 않으면 "불합격"을 경고 창에 표시합니다.
-function 평가(a, b) {
-  let 결과 = 곱하기(a, b);
+function 평가() {
+  let 결과 = 곱하기();
   if (결과 > 10) {
     Swal.fire('합격');
   } else {
@@ -53,21 +56,35 @@ function pokemon() {
     })
     .then(data => {
       console.log(data)
-      // 4. 포켓몬 이미지 URL과 오류 이미지 URL 설정
+      // 포켓몬 이름 가져오기
+      const pokemonName = data.name;
+      // 포켓몬 이미지 가져오기
       const imgUrl = data.sprites.other.dream_world.front_default;
+      // 포켓몬 에너지 가져오기
+      const hps = data.stats.find(data => data.stat.name === 'hp');
+      const hp = hps.base_stat
+      // 포켓몬 공격력 가져오기
+      const attacks = data.stats.find(data => data.stat.name === 'attack');
+      const attack = attacks.base_stat;
+      // 포켓몬 방어력 가져오기
+      const defenses = data.stats.find(data => data.stat.name === 'defense');
+      const defense = defenses.base_stat;
+      // 포켓몬 스피드 가져오기
+      const speeds = data.stats.find(data => data.stat.name === 'speed');
+      const speed = speeds.base_stat ;
 
       // 5. 포켓몬 이미지가 있는 경우 이미지 업데이트 및 이름 표시
       if (!!imgUrl) {
-        document.getElementById('poketmon').src = imgUrl; // 이미지 업데이트
-
-        const pokemonName = data.name; // 포켓몬 이름 가져오기
-        document.getElementById('pokemonName').textContent = pokemonName; // 이름 표시
-
+        Swal.fire({
+          title: pokemonName,
+          text: "에너지: " + hp + " / 공격력 : "+ attack + " / 방어력: " + defense + " / 스피드: " + speed,
+          imageUrl: imgUrl,
+          imageWidth: 400,
+          imageHeight: 200,
+        });
+        // 6. 포켓몬 이미지가 없는 경우  
       } else {
-        // 6. 포켓몬 이미지가 없는 경우 대체 이미지 표시
-        const boom = "https://t1.daumcdn.net/cfile/tistory/1918280B4B653C4B7C";//대체이미지
-        document.getElementById('poketmon').src = boom; // 대체 이미지 표시
-        document.getElementById('pokemonName').textContent = ''; // 이름 초기화
+        Swal.fire('꽝', '포켓몬 뽑기 실패', 'error');
       }
     })
     .catch(error => {
